@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "145230799957",
+    "project_id": "fitnessapp-1b0c9",
+    "storage_bucket": "fitnessapp-1b0c9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145230799957:android:8c367cb90df7f28b80a0dc",
+        "android_client_info": {
+          "package_name": "com.example.fast_fitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145230799957-1fppkbp18ra88lnkgs2c3ln74tc850iv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxZN_9z8sEgE6QJ55joEsvuUj2024qLCw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145230799957-1fppkbp18ra88lnkgs2c3ln74tc850iv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "145230799957-a2c22r9tlc2ll3s1toajo7pqne8thdvu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fastFitness"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
