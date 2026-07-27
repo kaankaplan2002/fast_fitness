@@ -6,22 +6,35 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: [self-hosted, macOS, ARM64]
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          cache: true
+      - name: Check Build Environment
+        run: |
+          echo "Runner user: $(whoami)"
+          echo "PATH=$PATH"
 
-      - name: Flutter Version
-        run: flutter --version
+          echo "----- Flutter -----"
+          which flutter
+          flutter --version
+
+          echo "----- Java -----"
+          which java
+          java -version
+
+          echo "----- Android SDK -----"
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+          which sdkmanager
+          sdkmanager --version
 
       - name: Flutter Doctor
         run: flutter doctor -v
@@ -39,8 +52,9 @@ jobs:
         run: flutter build apk --release
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: fast-fitness-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
+          retention-days: 14
