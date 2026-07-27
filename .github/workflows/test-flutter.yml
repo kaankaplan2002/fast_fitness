@@ -1,4 +1,4 @@
-name: Flutter Build
+name: Flutter Android Build
 
 on:
   push:
@@ -19,6 +19,20 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+          cache: gradle
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android licenses
+        run: yes | sdkmanager --licenses || true
+
+      - name: Install Android SDK packages
+        run: |
+          sdkmanager \
+            "platform-tools" \
+            "platforms;android-35" \
+            "build-tools;35.0.0"
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -28,6 +42,9 @@ jobs:
 
       - name: Flutter Version
         run: flutter --version
+
+      - name: Flutter Doctor
+        run: flutter doctor -v
 
       - name: Install Dependencies
         run: flutter pub get
@@ -44,5 +61,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: release-apk
+          name: fast-fitness-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
