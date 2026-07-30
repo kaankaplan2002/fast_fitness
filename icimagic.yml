@@ -14,4 +14,14 @@ steps:
       - uname -m
       - xcode-select -p
       - xcodebuild -version
-      - xcrun simctl list devices available
+
+  - name: inspect-flutter-project
+    image: bash
+    commands:
+      - test -f pubspec.yaml
+      - echo "=== PUBSPEC ==="
+      - sed -n '1,70p' pubspec.yaml
+      - echo "=== MEVCUT WORKFLOW FLUTTER AYARLARI ==="
+      - grep -R -n -E 'flutter-version|flutter-action|fvm|channel:' .github/workflows 2>/dev/null || true
+      - echo "=== PROJE PLATFORM KLASORLERI ==="
+      - find . -maxdepth 1 -type d -print | sort
