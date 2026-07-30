@@ -1,0 +1,14 @@
+labels:
+  platform: darwin/arm64
+  backend: local
+
+steps:
+  - name: verify-mac-mini
+    image: bash
+    commands:
+      - echo "ICIMagic pipeline Mac mini üzerinde çalışıyor"
+      - sw_vers
+      - uname -m
+      - xcode-select -p
+      - xcodebuild -version
+      - xcrun simctl list devices available
