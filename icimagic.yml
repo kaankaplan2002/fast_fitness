@@ -1,0 +1,36 @@
+when:
+  - event: manual
+
+labels:
+  platform: darwin/arm64
+  backend: local
+
+steps:
+  - name: verify-mac-mini
+    image: bash
+    commands:
+      - echo "ICIMagic Flutter pipeline başlatıldı"
+      - sw_vers
+      - uname -m
+      - xcodebuild -version
+      - flutter --version
+
+  - name: dependencies
+    image: bash
+    commands:
+      - flutter pub get
+
+  - name: analyze
+    image: bash
+    commands:
+      - flutter analyze --no-pub
+
+  - name: test
+    image: bash
+    commands:
+      - flutter test --no-pub
+
+  - name: build-ios-simulator
+    image: bash
+    commands:
+      - flutter build ios --simulator --debug --no-pub
